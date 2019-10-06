@@ -35,3 +35,12 @@ Depending on what version of docker you have the IP addresses for your container
 
 - Docker toolbox (legacy docker) uses the ip `192.168.99.100`
 - Regular Docker uses the ip `127.0.0.1`
+
+Docker toolbox volume mounting issues:
+
+- If you are using Docker toolbox with Oracle VM Virtualbox, then you will need to add the following folders to the shared folder:
+
+  - Backend
+  - Frontend
+  - Database/data
+  - Database/initdb
