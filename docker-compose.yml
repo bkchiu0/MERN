@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+  mongo:
+    image: mongo:4.2.0-bionic
+    container_name: mongodb
+    restart: always
+    volumes:
+      - ./Database/data:/data/db
+      - ./Database/initdb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: db
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+    depends_on:
+      - mongo
+
+  nodeapi:
+    container_name: nodeapi
+    restart: always
+    build:
+      context: ./Backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+
+  reactapp:
+    container_name: reactapp
+    restart: always
+    build:
+      context: ./Frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - nodeapi

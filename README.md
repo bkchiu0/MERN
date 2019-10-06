@@ -1,2 +1,7 @@
-# MERN
- MongoDB Express React Node Web App Template
+# PERN
+
+MongoDB Express React Node
+
+## About
+
+Deployed on docker containers.
