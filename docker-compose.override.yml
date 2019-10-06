@@ -1,0 +1,14 @@
+version: "3.3"
+services:
+  nodeapi:
+    container_name: dev-nodeapi
+    volumes:
+      - ./Backend:/node/src
+    entrypoint:
+      - npm
+      - start-dev
+
+  reactapp:
+    container_name: dev-reactapp
+    volumes:
+      - ./Frontend:/react/src
